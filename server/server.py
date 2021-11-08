@@ -315,15 +315,7 @@ def onClickGetMacAddress():
     if (cur != -1):
         message = "getMacAddress"
         connectionList[cur].send(str.encode(message))
-
-def onShowFolderTree():
-    global cur
-    print(cur)
-    if (cur != -1):
-
-        message = "showFolderTree"
-        connectionList[cur].send(str.encode(message))
-        
+  
 def onClickShowProcesses():
     global cur
     print(cur)
@@ -435,12 +427,10 @@ if __name__ == '__main__':
     b5 = Button(p2,text="Xem MAC address",command=onClickGetMacAddress)
     b5.grid(row=5,column=0,padx=30,pady=14,sticky=W)
 
-    b6 = Button(p2,text="Xem cây thư mục",command=onShowFolderTree)
-    b6.grid(row=6,column=0,padx=30,pady=14,sticky=W)
-
     b7 = Button(p2,text="Xem processes",command=onClickShowProcesses)
     b7.grid(row=7,column=0,padx=30,pady=14,sticky=W)
     
 
     start_new_thread(startServer,())
+
     root.mainloop()

